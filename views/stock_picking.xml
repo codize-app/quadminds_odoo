@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="stock_picking_qm">
+            <field name="name">stock.picking.form.qm</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <header>
+                        <button name="create_qm_order" type="object" string="Create Order QM"/>
+                    </header>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_company_page_qm">
+            <field name="name">res.company.form.qm</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook>
+                        <page string="QuadMinds">
+                            <group>
+                                <field name="qm_apikey" groups="base.group_no_one" />
+                            </group>
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
