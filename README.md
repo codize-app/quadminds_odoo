@@ -1,4 +1,4 @@
-# andreani_odoo
+# Odoo QuadMinds Integration
 Odoo Connector with QuadMinds
 
 
