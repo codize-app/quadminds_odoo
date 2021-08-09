@@ -21,12 +21,64 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     qm_code = fields.Char('QM Code')
+    qm_hour_from = fields.Selection([
+        ('00:00', '00:00'),
+        ('01:00', '01:00'),
+        ('02:00', '02:00'),
+        ('03:00', '03:00'),
+        ('04:00', '04:00'),
+        ('05:00', '05:00'),
+        ('06:00', '06:00'),
+        ('07:00', '07:00'),
+        ('08:00', '08:00'),
+        ('09:00', '09:00'),
+        ('10:00', '10:00'),
+        ('11:00', '11:00'),
+        ('12:00', '12:00'),
+        ('13:00', '13:00'),
+        ('14:00', '14:00'),
+        ('15:00', '15:00'),
+        ('16:00', '16:00'),
+        ('17:00', '17:00'),
+        ('18:00', '18:00'),
+        ('19:00', '19:00'),
+        ('20:00', '20:00'),
+        ('21:00', '21:00'),
+        ('22:00', '22:00'),
+        ('23:00', '23:00'),
+    ], 'Hour From')
+    qm_hour_to = fields.Selection([
+        ('00:00', '00:00'),
+        ('01:00', '01:00'),
+        ('02:00', '02:00'),
+        ('03:00', '03:00'),
+        ('04:00', '04:00'),
+        ('05:00', '05:00'),
+        ('06:00', '06:00'),
+        ('07:00', '07:00'),
+        ('08:00', '08:00'),
+        ('09:00', '09:00'),
+        ('10:00', '10:00'),
+        ('11:00', '11:00'),
+        ('12:00', '12:00'),
+        ('13:00', '13:00'),
+        ('14:00', '14:00'),
+        ('15:00', '15:00'),
+        ('16:00', '16:00'),
+        ('17:00', '17:00'),
+        ('18:00', '18:00'),
+        ('19:00', '19:00'),
+        ('20:00', '20:00'),
+        ('21:00', '21:00'),
+        ('22:00', '22:00'),
+        ('23:00', '23:00'),
+    ], 'Hour To')
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     def create_qm_order(self):
-        if self.partner_id.comment:
+        if self.partner_id.qm_code:
             url = "https://saas.quadminds.com/api/v2/pois/" + self.partner_id.qm_code
             headers = {
                 "Accept": "application/json",
@@ -48,9 +100,14 @@ class StockPicking(models.Model):
         if not self.origin:
             raise ValidationError('Picking needs Origin for QuadMinds identification!')
 
+        timeWindow = []
+
+        if self.partner_id.qm_hour_from and self.partner_id.qm_hour_to:
+            timeWindow = [{'from': self.partner_id.qm_hour_from, 'to': self.partner_id.qm_hour_to}]
+
         payload = [
             {
-                "timeWindow": [],
+                "timeWindow": timeWindow,
                 "orderItems": [],
                 "orderMeasures": [],
                 "code": self.origin,

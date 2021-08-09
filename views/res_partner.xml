@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_partner_page_qm">
+            <field name="name">res.partner.form.qm</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <notebook>
+                        <page string="QuadMinds">
+                            <group>
+                                <field name="qm_code" />
+                            </group>
+                            <strong>Desde: </strong>
+                            <field name="qm_hour_from" />
+                            <strong>Hasta: </strong>
+                            <field name="qm_hour_to" />
+                        </page>
+                    </notebook>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>
