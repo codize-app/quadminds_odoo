@@ -1,5 +1,5 @@
 # Odoo QuadMinds Integration
-Odoo Connector with QuadMinds
+Odoo Connector with QuadMinds [early stage]
 
 ## Installation
 Installs like any other Odoo module.
